@@ -1,17 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Idiomas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div>
+    <ion-item>
+      <ion-label>Selecciona un idioma:</ion-label>
+      <ion-select [(ngModel)]="selectedLanguage" (ionChange)="languageChanged()">
+        <ion-select-option *ngFor="let language of languages" [value]="language.code">{{ language.name
+          }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div>
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Nivel</ion-label>
+        <ion-select [(ngModel)]="nivel">
+          <ion-select-option *ngFor="let item of niveles" [value]="item">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Nombre de la empresa</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreEmpresa"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" size-lg="4" size-xl="3" class="column-container">
+          <ion-list lines="full">
+            <ion-item>
+              <ion-label position="stacked">Fecha de inicio</ion-label>
+              <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="fechaInicio" (ionChange)="onFechaInicioChange($event)"></ion-datetime>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size-md="6" size-lg="4" size-xl="3" class="column-container">
+          <ion-list lines="full">
+            <ion-item>
+              <ion-label position="stacked">Fecha de término</ion-label>
+              <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="fechaTermino" (ionChange)="onFechaTerminoChange($event)"></ion-datetime>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="buttons-container">
+
+      <ion-button shape="round" >Regresar</ion-button>
+      <ion-button shape="round" (click)="submitForm()">Añadir</ion-button>
+      <ion-button shape="round"  (click)="submitForm()">Guardar</ion-button>
+    </div>
+
+  </div>
+
 </ion-content>
